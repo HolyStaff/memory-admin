@@ -1,0 +1,65 @@
+<div class="admin-panel-container">
+  <h1>Memory Game Admin Panel</h1>
+
+  <!-- Login form when not authenticated -->
+  <div *ngIf="!isAuthenticated" class="login-section">
+    <div *ngIf="authError" class="auth-error">
+      {{ authError }}
+    </div>
+    <app-login (loginSuccess)="onLoginSuccess()"></app-login>
+  </div>
+
+  <!-- Dashboard content when authenticated -->
+  <div *ngIf="isAuthenticated">
+    <div class="refresh-info">
+      <p>Last refreshed: {{ lastRefreshed | date:'medium' }}</p>
+      <p class="auto-refresh-note">Data automatically refreshes every 30 seconds</p>
+    </div>
+
+    <div class="charts-container">
+      <div class="chart-card">
+        <h2>Game Statistics</h2>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [type]="aggregateChartType"
+            [data]="aggregateChartData"
+            [options]="aggregateChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h2>API Usage</h2>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [type]="apiChartType"
+            [data]="apiChartData"
+            [options]="apiChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h2>Games Played Per Day</h2>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [type]="datesChartType"
+            [data]="datesChartData"
+            [options]="datesChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h2>Player Information</h2>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [type]="playersChartType"
+            [data]="playersChartData"
+            [options]="playersChartOptions">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+.admin-panel-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.refresh-info {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.refresh-info p {
+  margin: 5px 0;
+}
+
+.auto-refresh-note {
+  font-style: italic;
+  color: #888;
+  font-size: 0.8rem;
+}
+
+h2 {
+  margin-top: 0;
+  color: #444;
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+}
+
+.chart-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+}
+
+.chart-wrapper {
+  height: 300px;
+  position: relative;
+}
+
+.login-section {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.auth-error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-wrapper {
+    height: 250px;
+  }
+}
