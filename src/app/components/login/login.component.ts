@@ -43,48 +43,52 @@ import { AuthService } from '../../services/auth.service';
     </div>
   `,
   styles: [`
+    /* Mobile-first styles */
     .login-container {
-      max-width: 400px;
+      width: 100%;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 20px;
+      padding: 15px;
       background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       color: #333;
+      font-size: 1.3rem;
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       font-weight: 500;
       color: #555;
+      font-size: 0.9rem;
     }
 
     input {
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       border: 1px solid #ddd;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       background-color: #3f51b5;
       color: white;
       border: none;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 14px;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -101,10 +105,90 @@ import { AuthService } from '../../services/auth.service';
     .error-message {
       background-color: #ffebee;
       color: #c62828;
-      padding: 10px;
+      padding: 8px;
       border-radius: 4px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* Tablet styles */
+    @media (min-width: 576px) {
+      .login-container {
+        max-width: 80%;
+        padding: 18px;
+        border-radius: 7px;
+      }
+
+      h2 {
+        margin-bottom: 18px;
+        font-size: 1.4rem;
+      }
+
+      .form-group {
+        margin-bottom: 14px;
+      }
+
+      label {
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+      }
+
+      input {
+        padding: 9px;
+        font-size: 15px;
+      }
+
+      button {
+        padding: 11px;
+        font-size: 15px;
+      }
+
+      .error-message {
+        padding: 9px;
+        margin-bottom: 14px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Desktop styles */
+    @media (min-width: 992px) {
+      .login-container {
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        margin-bottom: 5px;
+        font-size: 1rem;
+      }
+
+      input {
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      .error-message {
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+      }
     }
   `]
 })

@@ -1,82 +1,166 @@
+/* Mobile-first styles */
 .admin-panel-container {
-  padding: 20px;
-  max-width: 1200px;
+  padding: 10px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #333;
+  font-size: 1.5rem;
 }
 
 .refresh-info {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .refresh-info p {
-  margin: 5px 0;
+  margin: 3px 0;
 }
 
 .auto-refresh-note {
   font-style: italic;
   color: #888;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 h2 {
   margin-top: 0;
   color: #444;
+  font-size: 1.2rem;
 }
 
 .charts-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 15px;
 }
 
 .chart-card {
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   transition: transform 0.3s ease;
+  margin-bottom: 10px;
 }
 
 .chart-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .chart-wrapper {
-  height: 300px;
+  height: 250px;
   position: relative;
 }
 
 .login-section {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 1rem;
+  max-width: 100%;
+  margin: 1rem auto;
+  padding: 0.5rem;
 }
 
 .auth-error {
   background-color: #ffebee;
   color: #c62828;
-  padding: 10px;
+  padding: 8px;
   border-radius: 4px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
-@media (max-width: 768px) {
+/* Tablet styles */
+@media (min-width: 576px) {
+  .admin-panel-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+  }
+
+  .refresh-info {
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+  }
+
+  .auto-refresh-note {
+    font-size: 0.75rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .chart-card {
+    padding: 18px;
+  }
+
+  .login-section {
+    max-width: 80%;
+    padding: 0.8rem;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 992px) {
+  .admin-panel-container {
+    padding: 20px;
+    max-width: 1200px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .refresh-info {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .auto-refresh-note {
+    font-size: 0.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
   .charts-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px;
+  }
+
+  .chart-card {
+    padding: 20px;
+    margin-bottom: 0;
+  }
+
+  .chart-card:hover {
+    transform: translateY(-5px);
   }
 
   .chart-wrapper {
-    height: 250px;
+    height: 300px;
+  }
+
+  .login-section {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+
+  .auth-error {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
   }
 }

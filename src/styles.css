@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Global mobile-first styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Responsive font size adjustments */
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Ensure images and other elements don't overflow their containers */
+img, embed, object, video {
+  max-width: 100%;
+}
+
+/* Improve touch targets on mobile */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+/* Improve accessibility for focus states */
+:focus {
+  outline: 3px solid rgba(63, 81, 181, 0.5);
+  outline-offset: 2px;
+}
