@@ -6,11 +6,12 @@ import { AdminService } from '../../services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from '../login/login.component';
 import { forkJoin, interval, Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective, LoginComponent],
+  imports: [CommonModule, BaseChartDirective, LoginComponent, FormsModule],
   templateUrl: './admin-panel.html',
   styleUrl: './admin-panel.css'
 })
@@ -19,6 +20,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   public lastRefreshed: Date = new Date();
   public isAuthenticated = false;
   public authError = '';
+  public playerMetric: 'gamesPlayed' | 'averageScore' = 'gamesPlayed';
   // Aggregate data chart
   public aggregateChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -118,6 +120,22 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       title: {
         display: true,
         text: 'Player Information'
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => {
+            const value = context.parsed.y;
+            // Use dataset label to determine metric
+            const metricLabel = context.dataset.label === 'Games Played' ? 'Games Played' : (context.dataset.label === 'Average Score' ? 'Average Score' : 'Value');
+            return `${metricLabel}: ${value}`;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        // suggestedMax will be set dynamically in updatePlayersChart
       }
     }
   };
@@ -337,29 +355,44 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     console.log('Updating players chart with data:', { players, scores, topScores });
     if (players && Array.isArray(players) && players.length > 0) {
       const labels = players.map(player => player.username);
-
-      // Find corresponding scores for each player
-      const scoreData = players.map(player => {
-        const playerScore = scores.find(score => score.username === player.username);
-        return playerScore ? playerScore.averageScore : 0;
-      });
-
-      // Create a new reference to trigger change detection
+      let data: number[];
+      if (this.playerMetric === 'gamesPlayed') {
+        data = players.map(player =>
+          scores.filter(score => score.username === player.username).length
+        );
+      } else {
+        data = players.map(player => {
+          const playerScore = scores.find(score => score.username === player.username);
+          return playerScore ? playerScore.averageScore : 0;
+        });
+      }
+      // Dynamically set suggestedMax for y-axis
+      const max = Math.max(...data, 1);
+      if (!this.playersChartOptions) return;
+      this.playersChartOptions = {
+        ...this.playersChartOptions,
+        scales: {
+          ...(this.playersChartOptions.scales ?? {}),
+          y: {
+            ...(this.playersChartOptions.scales?.['y'] ?? {}),
+            suggestedMax: max < 5 ? 5 : Math.ceil(max * 1.1)
+          }
+        }
+      };
       this.playersChartData = {
         ...this.playersChartData,
         labels: labels,
         datasets: [{
           ...this.playersChartData.datasets[0],
-          data: scoreData
+          data: data,
+          label: this.playerMetric === 'gamesPlayed' ? 'Games Played' : 'Average Score'
         }]
       };
       console.log('Players chart data updated:', this.playersChartData);
     } else {
       // If no data is available, create a sample dataset
-      // This helps with testing when the backend doesn't have data yet
       const samplePlayers = ['Player1', 'Player2', 'Player3', 'Player4'];
       const sampleScores = [123, 312, 412, 231];
-
       this.playersChartData = {
         ...this.playersChartData,
         labels: samplePlayers,
